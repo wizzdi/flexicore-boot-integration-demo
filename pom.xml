@@ -6,7 +6,7 @@
 
     <groupId>org.example</groupId>
     <artifactId>pet-server</artifactId>
-    <version>2.0.0</version>
+    <version>3.0.0</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -47,11 +47,13 @@
         <dependency>
             <groupId>com.wizzdi</groupId>
             <artifactId>flexicore-boot-dynamic-invokers-model</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.wizzdi</groupId>
             <artifactId>flexicore-boot-dynamic-invokers-service</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -91,17 +93,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jcache</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>org.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>3.6.3</version>
-            <scope>runtime</scope>
-        </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-webmvc-core</artifactId>
