@@ -13,15 +13,13 @@ import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-@SpringBootApplication()
+@SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = PetRepository.class)
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableFlexiCorePlugins
