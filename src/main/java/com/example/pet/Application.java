@@ -4,6 +4,8 @@ import com.example.pet.data.PetRepository;
 import com.wizzdi.flexicore.boot.base.annotations.plugins.EnableFlexiCorePlugins;
 import com.wizzdi.flexicore.boot.jpa.annotations.EnableFlexiCoreJPAPlugins;
 import com.wizzdi.flexicore.boot.rest.annotations.EnableFlexiCoreRESTPlugins;
+import com.wizzdi.flexicore.boot.swagger.annotations.EnableFlexiCoreSwaggerPlugins;
+import com.wizzdi.flexicore.security.annotations.EnableFlexiCoreSecurity;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,12 +21,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.io.IOException;
 import java.util.Arrays;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableJpaRepositories(basePackageClasses = PetRepository.class)
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableFlexiCorePlugins
 @EnableFlexiCoreJPAPlugins
 @EnableFlexiCoreRESTPlugins
+@EnableFlexiCoreSecurity
+@EnableFlexiCoreSwaggerPlugins
 public class Application {
 
 
@@ -33,13 +37,6 @@ public class Application {
         app.addListeners(new ApplicationPidFileWriter());
         ConfigurableApplicationContext context=app.run(args);
 
-    }
-
-
-    @Bean
-    @Primary
-    public PlatformTransactionManager transactionManager(PlatformTransactionManager platformTransactionManager){
-        return platformTransactionManager;
     }
 
 
