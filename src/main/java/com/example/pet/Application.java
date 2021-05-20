@@ -1,7 +1,10 @@
 package com.example.pet;
 
 import com.example.pet.data.PetRepository;
+import com.flexicore.annotations.EnableFlexiCoreBaseServices;
 import com.wizzdi.flexicore.boot.base.annotations.plugins.EnableFlexiCorePlugins;
+import com.wizzdi.flexicore.boot.dynamic.invokers.annotations.EnableDynamicInvokersPlugins;
+import com.wizzdi.flexicore.boot.jaxrs.annotations.EnableFlexiCoreJAXRSPlugins;
 import com.wizzdi.flexicore.boot.jpa.annotations.EnableFlexiCoreJPAPlugins;
 import com.wizzdi.flexicore.boot.rest.annotations.EnableFlexiCoreRESTPlugins;
 import com.wizzdi.flexicore.boot.swagger.annotations.EnableFlexiCoreSwaggerPlugins;
@@ -25,8 +28,11 @@ import java.util.Arrays;
 @EnableFlexiCorePlugins
 @EnableFlexiCoreJPAPlugins
 @EnableFlexiCoreRESTPlugins
+@EnableFlexiCoreBaseServices
 @EnableFlexiCoreSecurity
 @EnableFlexiCoreSwaggerPlugins
+@EnableDynamicInvokersPlugins
+@EnableFlexiCoreJAXRSPlugins
 public class Application {
 
 
