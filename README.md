@@ -19,6 +19,8 @@ FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the 
 run with spring boot properties launcher
 
     java -jar pet-server-2.0.0-exec.jar -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/
+    
+plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
  ## How to Test?
  Swagger interface can be found in http://localhost:8080/swagger-ui.html
  
@@ -28,6 +30,9 @@ run with spring boot properties launcher
 run with spring boot properties launcher
 
     java -jar pet-server-3.0.0-exec.jar -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/
+    
+plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
+
  ## How to Test?
  Swagger interface can be found in http://localhost:8080/FlexiCore/
  login is done using the admin@flexicore.com user this user password is show in a text file called firstRun.txt in /home/flexicore/
