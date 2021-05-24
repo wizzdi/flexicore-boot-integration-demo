@@ -6,14 +6,19 @@ import com.wizzdi.flexicore.boot.jpa.annotations.EnableFlexiCoreJPAPlugins;
 import com.wizzdi.flexicore.boot.rest.annotations.EnableFlexiCoreRESTPlugins;
 import com.wizzdi.flexicore.boot.swagger.annotations.EnableFlexiCoreSwaggerPlugins;
 import com.wizzdi.flexicore.security.annotations.EnableFlexiCoreSecurity;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.boot.context.ApplicationPidFileWriter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
@@ -33,8 +38,13 @@ public class Application {
     public static void main(String[] args) throws IOException {
         SpringApplication app = new SpringApplication(Application.class);
         app.addListeners(new ApplicationPidFileWriter());
-        ConfigurableApplicationContext context=app.run(args);
+        ConfigurableApplicationContext context = app.run(args);
 
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(PlatformTransactionManager jpaTransactionManager) {
+        return jpaTransactionManager;
     }
 
 
@@ -49,8 +59,7 @@ public class Application {
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
-            System.out.println("total of "+beanNames.length +" beans");
-
+            System.out.println("total of " + beanNames.length + " beans");
 
 
         };
