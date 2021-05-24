@@ -22,7 +22,7 @@ run with spring boot properties launcher
     
 plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
  ## How to Test?
- Swagger interface can be found in http://localhost:8080/swagger-ui.html
+ Swagger interface can be found in http://localhost:8080/swagger-ui.html , note that in the 2.0.0 fake authentication mechanism is used so a fake token should be provided when using swagger ( if the api requires a token).
  
 # Branch 3.0.0
 [FlexiCore Boot Dynamic UI](https://support.wizzdi.com/#dynamic-user-interface) Capabilities Demo
