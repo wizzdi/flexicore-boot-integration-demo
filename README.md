@@ -18,7 +18,7 @@ FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the 
  ## How to Run ?
 run with spring boot properties launcher
 
-    java -jar pet-server-2.0.0-exec.jar -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/
+    java -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/ -jar pet-server-2.0.0-exec.jar 
     
 plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
  ## How to Test?
@@ -29,7 +29,7 @@ plugins should be placed in the /home/flexicore/plugins directory , entities sho
  ## How to Run ?
 run with spring boot properties launcher
 
-    java -jar pet-server-3.0.0-exec.jar -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/
+    java -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/ -jar pet-server-3.0.0-exec.jar 
     
 plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
 
