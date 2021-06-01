@@ -1,7 +1,9 @@
 # FlexiCore Boot Integration Demo
 
 This Repository demonstrates how to add FlexiCore Boot capabilities to an existing Spring Boot project.
+The code has few branches, each presents additional capabilites, starting with a basic Spring application.
 
+# prerequizites 
 
 # Branch 1.0.0
  the initial spring boot application does not contain any FlexiCore Boot Dependency
