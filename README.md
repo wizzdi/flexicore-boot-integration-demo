@@ -374,6 +374,42 @@ You should now see additional APIs for managing library entities, subscriptions 
 
 <img src="https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/stage%204.jpg?raw=true" alt="stage 4.jpg" style="zoom:50%;" />
 
+
+
+## Enable tests on library-service
+
+We have built the library-service with the *-DskipTests* option.
+
+this is because there most be a database set for the tests, **you can skip this part and move to Branch 3.0.0 below**
+
+Setting the database and user for the test
+
+```bash
+'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'
+# enter on all prompts
+# provide the password for adminstration 
+#then
+ create database "flexicore-boot";
+# may fail if this database exists
+ create user "flexicore-boot" with password 'flexicore-boot';
+ # may fail if this user exists
+ grant all privileges on database "flexicore-boot" to "flexicore-boot";
+#note the single and double quotes needed because of the hyphen in the name.
+\q
+# to exit PSQL
+```
+
+now you can run the build of the *library-service*  with tests.
+
+```bash
+ cd C:\Users\User\source\FlexiCore-Examples\library-service\
+ mvn clean install
+```
+
+After a while , you should see the 'build success' message, it will be provided **only** if all tests pass.
+
+
+
 # Branch 3.0.0
 
 [FlexiCore Boot Dynamic UI](https://support.wizzdi.com/#dynamic-user-interface) Capabilities Demo.
