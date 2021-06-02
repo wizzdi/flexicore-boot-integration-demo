@@ -268,7 +268,7 @@ usually the last line in the output when server is ready is (number of beans may
  Below is a typical OpenAPI-Definition with FlexiCore-boot dependencies added to the project *pom.xml* this is the only difference between 1.0.0 and 2.0.0 branches.
  
 
-![image-20210602152026489](https://1drv.ms/u/s!AqyJyQGh1gG8h8wsmPp2tUYhNWnY9w?e=LePttc)
+![image-20210602152026489](https://1drv.ms/u/s!AqyJyQGh1gG8h8wsmPp2tUYhNWnY9w?e=9puovO)
 
 ## Plugins copied to folders,  new APIs appear....
 
