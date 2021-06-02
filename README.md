@@ -145,6 +145,38 @@ You can test the APIs using the 'try it out' button, try the *PUT*  API and crea
 
 # Branch 2.0.0
 
+we now need to checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
+
+## FlexiCore boot modules added, no plugins yet..
+
+Our intention is to see how the Spring Boot app looks like with FlexiCore support but with no plugins in designated folders.
+
+**Note that we do not add any dependencies on Person service or model**
+
+We need to use the 2.0.0 branch to add FlexiCore capabilities
+
+```bash
+cd ~/source/flexicore-boot-integration-demo
+git checkout 2.0.0
+mvn clean package
+```
+
+make sure build is successful and proceed to testing the system.
+
+ ## How to Run ?
+
+run with spring boot properties launcher
+
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+#the '' are required when using PowerShell on Windows
+```
+
+    wait till the server starts and access the API via Swagger:
+
+usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
+
+ Below is a typical OpenAPI-Definition with FlexiCore-boot dependencies added to the project *pom.xml* this is the only difference between 1.0.0 and 2.0.0 branches.
 FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the Person Service/Model and Library Service/Model found here: https://github.com/wizzdi/FlexiCore-Examples
 
 We will first test just the *Person* model and service. 
@@ -233,38 +265,7 @@ mvn clean install
 
 ```
 
-we now need to checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
 
-## FlexiCore boot modules added, no plugins yet..
-
-Our intention is to see how the Spring Boot app looks like with FlexiCore support but with no plugins in designated folders.
-
-**Note that we do not add any dependencies on Person service or model**
-
-We need to use the 2.0.0 branch to add FlexiCore capabilities
-
-```bash
-cd ~/source/flexicore-boot-integration-demo
-git checkout 2.0.0
-mvn clean package
-```
-
-make sure build is successful and proceed to testing the system.
-
- ## How to Run ?
-
-run with spring boot properties launcher
-
-```bash
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
-#the '' are required when using PowerShell on Windows
-```
-
-    wait till the server starts and access the API via Swagger:
-
-usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
-
- Below is a typical OpenAPI-Definition with FlexiCore-boot dependencies added to the project *pom.xml* this is the only difference between 1.0.0 and 2.0.0 branches.
 
 https://1drv.ms/u/s!AqyJyQGh1gG8h8wsmPp2tUYhNWnY9w?e=9puovO
 
