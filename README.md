@@ -236,6 +236,10 @@ mvn clean install
 
 we now need to checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
 
+## FlexiCore boot modules added, no plugins yet..
+
+Our intention is to see how the Spring Boot app looks like with FlexiCore support but with no plugins in designated folders.
+
 **Note that we do not add any dependencies on Person service or model**
 
 We need to use the 2.0.0 branch to add FlexiCore capabilities
@@ -246,7 +250,7 @@ git checkout 2.0.0
 mvn clean package
 ```
 
-make sure build is successful and proceed to testing the system
+make sure build is successful and proceed to testing the system.
 
  ## How to Run ?
 
@@ -254,24 +258,62 @@ run with spring boot properties launcher
 
 ```bash
 java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+#the '' are required when using PowerShell on Windows
 ```
+
+​    wait till the server starts and access the API via Swagger:
+
+usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
+
+ Below is a typical OpenAPI-Definition with FlexiCore-boot dependencies added to the project *pom.xml* this is the only difference between 1.0.0 and 2.0.0 branches.
+
+![image-20210602152026489](C:\Users\Avishay Ben Natan\AppData\Roaming\Typora\typora-user-images\image-20210602152026489.png)
+
+## Plugins copied to folders,  new APIs appear....
+
+We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
+
+plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
 
 ```
 #in case the folders are not there yet
 mkdir /home/flexicore/plugins
 mkdir /home/flexicore/entities
 # the above assumes using Windows PowerShell
- cp .\target\person-service-2.0.0.jar C:\home\flexicore\plugins\
- cd ..\person-model
- cp .\target\person-model-2.0.0.jar C:\home\flexicore\entities\
+#copy the person-model jar to default location
+cp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.0.jar  C:\home\flexicore\entities\
+
+#copy the person-service plugin to default location
+ cp C:\Users\User\source\FlexiCore-Examples\person-service\target\person-service-2.0.0.jar C:\home\flexicore\plugins\
+
+
+
 #we now have the person service and model in the default location for FlexiCore plugins
 ```
 
-plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
+
+
+
 
  ## How to Test?
 
  Swagger interface can be found in http://localhost:8080/swagger-ui.html , note that in the 2.0.0 fake authentication mechanism is used so a fake token should be provided when using swagger ( if the API requires a token).
+
+
+
+```
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
+```
+
+wait till you see the last message indicating that the server has started
+
+![image-20210602154202962](C:\Users\Avishay Ben Natan\AppData\Roaming\Typora\typora-user-images\image-20210602154202962.png)
+
+**As we can see by copying the plugins to correct folders, additional APIs (See the *Person* API), business workflows and domain model entities are now available on Swagger UI.**
+
+
 
 # Branch 3.0.0
 
