@@ -25,7 +25,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 - Java 11 JDK  , can use newer versions,  OpenJDK can be obtained from https://jdk.java.net/archive/
 
-  []: B
+
 
  the initial spring boot application does not contain any FlexiCore Boot Dependency
 
