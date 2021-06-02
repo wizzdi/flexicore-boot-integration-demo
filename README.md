@@ -142,7 +142,7 @@ You should see, after a while, an interface for testing the API endpoints
 You can test the APIs using the 'try it out' button, try the *PUT*  API and create a pet. Then use the *GET* API to get created pets instances.
 [see an image of Swagger here](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg)
 
-
+![first stage.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg?raw=true)
 
 # Branch 2.0.0
 
@@ -261,7 +261,7 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 #the '' are required when using PowerShell on Windows
 ```
 
-​    wait till the server starts and access the API via Swagger:
+    wait till the server starts and access the API via Swagger:
 
 usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
 
