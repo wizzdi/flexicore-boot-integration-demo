@@ -27,7 +27,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
   - If you have another JDK installed, it can be used if >= version 11. However this demo was tested with version 11.
 
-  - The installation in Windows requires adding an environment variable JAVA_HOME and the bin folder of the JDK to Windows path. you can use the tutorial here: https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph
+  - The installation in Windows requires adding an environment variable JAVA_HOME and the bin folder of the JDK to Windows path. you can use the tutorial [here:] (https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph)
 
   - [https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph]: 	"title"
 
