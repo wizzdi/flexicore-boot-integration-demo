@@ -3,15 +3,29 @@
 This Repository demonstrates how to add FlexiCore Boot capabilities to an existing Spring Boot project.
 The code has few branches, each presents additional capabilities, starting with a basic Spring application.
 
+This example uses a database and is configured to use PostgreSQL database.
+
+## Three different options for running this demo
+
+- clone this repository and later in the demo the plugins repositories, this is the recommended way but it requires a manual installation of 
+
+- use a pre-installed Docker from here
+
+  []: 
+
+- use an installation file for Windows (here) and for Linux (here)
+
+
+
 ### note: this page is being edited, update will be available on 02-June-2021 noon time EST
 
 
 
 # prerequisites 
 
-- Java 11 JDK  , can use newer versions, 
+- Java 11 JDK  , can use newer versions,  OpenJDK can be obtained from https://jdk.java.net/archive/
 
-# Branch 1.0.0
+  []: B
 
  the initial spring boot application does not contain any FlexiCore Boot Dependency
 
