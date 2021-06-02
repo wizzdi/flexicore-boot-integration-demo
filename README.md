@@ -11,7 +11,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 - use a pre-installed Docker from here
 
-  []: 
+ 
 
 - use an installation file for Windows (here) and for Linux (here)
 
