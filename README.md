@@ -21,35 +21,55 @@ This example uses a database and is configured to use PostgreSQL database.
 
 
 
-# prerequisites 
+# prerequisites for Windows 
 
 - Java 11 JDK  , can use newer versions,  OpenJDK can be obtained from https://jdk.java.net/archive/
 
   - If you have another JDK installed, it can be used if >= version 11. However this demo was tested with version 11.
 
-  - The installation in Windows requires adding an environment variable JAVA_HOME and the bin folder of the JDK to Windows path. you can use the tutorial
-  - [1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-  - [https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph]: 	"title"
-
-    
-
-    
-
+  - The installation in Windows requires adding an environment variable JAVA_HOME and the bin folder of the JDK to Windows path.
+  - you can use the tutorial: https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph
   - test Java installation by typing (at the command line) *java -version*
 
 - Apache Maven from here https://maven.apache.org/download.cgi
 
-  - Maven is used here for building the artifacts, these can be built using an IDE like IntelliJ/Netbeans/Eclipse
+  - Maven is used here for building the artifacts, these can be built using an IDE like IntelliJ/Netbeans/Eclipse.
+  - Maven bin folder should be added to the path variable.
+  - check by *mvn -version*  
+
+- Install *git *  for Windows from here: https://git-scm.com/download/win
 
 - PostgreSQL database server from here: https://www.enterprisedb.com/downloads/postgres-postgresql-downloads
 
-  
+  - You can uncheck the *stack builder * tools of the installer.
 
+  - write down the PostgreSQL administrator password you choose.
 
+  - you can either use PostgreSQL PGAdmin user interface or use PSQL at:
+
+    - C:\Program Files\PostgreSQL\13\scripts\runpsql.bat   (the actual number is the major version of PostgreSQL, here version 13)
+
+    - use enter at prompts, enter the password when prompted
+
+    - then at PSQL command line, execute
+
+    - ```bash
+      create database pet;
+      ```
+
+    - ```bash
+      create user pet with password 'pet';
+      ```
+
+    - ```bash
+      GRANT ALL PRIVILEGES ON database pet to pet;
+      ```
+
+  - You can use Pgadmin to create the *pet *database **, create a user 'pet' with password 'pet', then grant all privileges on the pet database to the pet user.
 
  the initial spring boot application does not contain any FlexiCore Boot Dependency
+
+
 
  ## How to Run ?
 
