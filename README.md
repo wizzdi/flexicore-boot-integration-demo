@@ -380,7 +380,9 @@ You should now see additional APIs for managing library entities, subscriptions 
 
 We have built the library-service with the *-DskipTests* option.
 
-this is because there most be a database set for the tests, **you can skip this part and move to Branch 3.0.0 below**
+this is because there must be a database set for the tests, this database is dropped on every run and it is not the 'pet database' 
+
+**you can skip this part and move to Branch 3.0.0 below**
 
 Setting the database and user for the test
 
