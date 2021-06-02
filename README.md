@@ -140,7 +140,7 @@ run as any spring boot application:
 You should see, after a while, an interface for testing the API endpoints
 
 You can test the APIs using the 'try it out' button, try the *PUT*  API and create a pet. Then use the *GET* API to get created pets instances.
-[see an image of Swagger here](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg)
+
 
 ![first stage.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg?raw=true)
 
