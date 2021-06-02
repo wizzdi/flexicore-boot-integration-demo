@@ -416,6 +416,16 @@ After a while , you should see the 'build success' message, it will be provided 
 
 [FlexiCore Boot Dynamic UI](https://support.wizzdi.com/#dynamic-user-interface) Capabilities Demo.
 
+## How to build
+
+```bash
+cd C:\Users\User\source\flexicore-boot-integration-demo\
+git checkout 3.0.0
+mvn clean package
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-3.0.0-exec.jar
+
+```
+
 
 
  ## How to Run ?
