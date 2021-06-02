@@ -3,6 +3,10 @@
 This Repository demonstrates how to add FlexiCore Boot capabilities to an existing Spring Boot project.
 The code has few branches, each presents additional capabilities, starting with a basic Spring application.
 
+The basic application has no FlexiCore dependencies and is changed to include these capabilities, from that point on, the basic application is expanded via plugins, this include domain model changes, APIs and finally FlexiCore dynamic User interface support.
+
+**Note**: the instructions here have been verified on clean Windows 10 virtual machine, step by step, however, if anything goes wrong, contact info@wizzdi.com for support.
+
 This example uses a database and is configured to use PostgreSQL database.
 
 ## Three different options for running this demo
@@ -11,13 +15,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 - use a pre-installed Docker from here
 
- 
-
 - use an installation file for Windows (here) and for Linux (here)
-
-
-
-### note: this page is being edited, update will be available on 02-June-2021 noon time EST
 
 
 
@@ -69,28 +67,184 @@ This example uses a database and is configured to use PostgreSQL database.
 
  the initial spring boot application does not contain any FlexiCore Boot Dependency
 
+# Branch 1.0.0
+
+## How to build
+
+at the command line, change the current directory to an empty directory of your choice, for example:
+
+C:\Users\User\source>
+
+Get the source from GitHub
+
+```bash
+git clone https://github.com/wizzdi/flexicore-boot-integration-demo
+```
+
+after cloning the folder you should see structure like this
+
+```bash
+├───flexicore-boot-integration-demo
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───example
+│           │           └───pet
+│           │               ├───controller
+│           │               ├───data
+│           │               ├───model
+│           │               ├───request
+│           │               └───service
+│           └───resources
+```
+
+for stage 1.0.0 we need to checkout this branch
+
+​	 	
+
+```bash
+cd flexicore-boot-integration-demo
+```
+
+```
+git checkout 1.0.0
+```
+
+we can now build the package using *maven*
+
+```bash
+mvn clean package
+```
+
+make sure you get something similar to:
+
+
+
+*[INFO] BUILD SUCCESS*
+*[INFO] ------------------------------------------------------------------------*
+*[INFO] Total time:  10.718 s*
+*[INFO] Finished at: 2021-06-02T11:30:15+03:00*
+
+The first time you build can take few minutes for all dependencies to be fetched from online repositories.
+
 
 
  ## How to Run ?
 
 run as any spring boot application:
 
-    java -jar pet-server-1.0.0-exec.jar
+    java -jar target/pet-server-1.0.0-exec.jar
+
+
 
  ## How to Test?
 
  Swagger interface can be found in http://localhost:8080/swagger-ui.html
+You should see, after a while, an interface for testing the API endpoints
+
+You can test the APIs using the 'try it out' button, try the *PUT*  API and create a pet. Then use the *GET* API to get created pets instances.
+
+
 
 
 # Branch 2.0.0
 
-FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the Person Service/Model and Library Service/Model found [here](https://github.com/wizzdi/FlexiCore-Examples)
+FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the Person Service/Model and Library Service/Model found here: https://github.com/wizzdi/FlexiCore-Examples
+
+### clone the repository
+
+  	this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
+
+```bash
+cd ~/source
+git clone https://github.com/wizzdi/FlexiCore-Examples
+cd FlexiCore-Examples
+tree 
+├───hello-world-rest
+│  
+├───hello-world-service
+│   
+├───library-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───library
+│           │                   └───model
+│           └───resources
+├───library-service
+│   └───src
+│       ├───main
+│       │   └───java
+│       │       └───com
+│       │           └───flexicore
+│       │               └───examples
+│       │                   ├───data
+│       │                   ├───request
+│       │                   ├───rest
+│       │                   └───service
+│       └───test
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───examples
+│           │               └───app
+│           └───resources
+├───person-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───person
+│           └───resources
+└───person-service
+    └───src
+        ├───main
+        │   └───java
+        │       └───com
+        │           └───flexicore
+        │               └───examples
+        │                   ├───data
+        │                   ├───request
+        │                   ├───rest
+        │                   └───service
+        └───test
+            ├───java
+            │   └───com
+            │       └───flexicore
+            │           └───examples
+            │               └───app
+            └───resources
+```
+
+We need to build and install (some of the depend-on artifacts) the following projects
+
+```bash
+cd person-model
+mvn clean install
+cd ../person-service
+mvn clean install
+#in case the folders are not there yet
+mkdir /home/flexicore/plugins
+mkdir /home/flexicore/entities
+# the above assumes using Windows PowerShell
+
+```
+
+
 
  ## How to Run ?
 
 run with spring boot properties launcher
 
-    java -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/ -jar pet-server-2.0.0-exec.jar 
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+```
 
 plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
 
