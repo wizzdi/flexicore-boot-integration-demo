@@ -145,13 +145,15 @@ You can test the APIs using the 'try it out' button, try the *PUT*  API and crea
 
 # Branch 2.0.0
 
-we now need to checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
+We will now show how plugins and entities jar can be added to pre-designated or configured folder to an existing Spring Boot app.
 
-## FlexiCore boot modules added, no plugins yet..
+For this we need to add to the Spring Boot Application the required FlexiCore dependencies, this is done once.  Then the life cycle of a system will be 100% in plugins.
 
-Our intention is to see how the Spring Boot app looks like with FlexiCore support but with no plugins in designated folders.
+Checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
 
-**Note that we do not add any dependencies on Person service or model**
+## FlexiCore boot modules added
+
+
 
 We need to use the 2.0.0 branch to add FlexiCore capabilities
 
@@ -163,7 +165,7 @@ mvn clean package
 
 make sure build is successful and proceed to testing the system.
 
- ## How to Run ?
+ ## How to Test?
 
 run with spring boot properties launcher
 
@@ -176,10 +178,21 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 
 usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
 
- Below is a typical OpenAPI-Definition with FlexiCore-boot dependencies added to the project *pom.xml* this is the only difference between 1.0.0 and 2.0.0 branches.
-FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the Person Service/Model and Library Service/Model found here: https://github.com/wizzdi/FlexiCore-Examples
+```
+http://localhost:8080/swagger-ui.html
+```
 
-We will first test just the *Person* model and service. 
+![first stage.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg?raw=true)
+
+You can now see that many APIs endpoints have been added to the system, these are FlexiCore boot APIs 
+
+## Building Plugins, adding plugins to app (no changes in the Spring Application)
+
+
+
+files found here: https://github.com/wizzdi/FlexiCore-Examples
+
+We will first add just the *Person* model and service. 
 
 As Person service depends on Person model, we have to build and **install** it first.
 
@@ -258,26 +271,11 @@ We need to build and install (some of the depend-on artifacts) the following pro
 ```bash
 cd person-model
 mvn clean install
-#build the person-model the person-service requires
+#built the person-model the person-service requires
 cd ../person-service
 mvn clean install
 # we 'maven' install the person service as it will be needed by the library service.
 
-```
-
-
-
-https://1drv.ms/u/s!AqyJyQGh1gG8h8wsmPp2tUYhNWnY9w?e=9puovO
-
-
-
-## Plugins copied to folders,  new APIs appear....
-
-We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
-
-plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
-
-```
 #in case the folders are not there yet
 mkdir /home/flexicore/plugins
 mkdir /home/flexicore/entities
@@ -291,9 +289,25 @@ cp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.
 
 
 #we now have the person service and model in the default location for FlexiCore plugins
+
+```
+
+now stop the running Spring application from the previous stage and run it again, unchanged.
+
+```
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-1.0.0-exec.jar
+
+#make sure that you corectly change the path to the location of pet-server-1.0.0-exec.jar on your system
+
 ```
 
 
+
+## Plugins copied to folders,  new APIs appear....
+
+We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
+
+plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
 
 
 
