@@ -53,15 +53,10 @@ This example uses a database and is configured to use PostgreSQL database.
 
     - ```bash
       create database pet;
-      ```
-
-    - ```bash
       create user pet with password 'pet';
-      ```
-
-    - ```bash
       GRANT ALL PRIVILEGES ON database pet to pet;
       ```
+
 
   - You can use Pgadmin to create the *pet *database **, create a user 'pet' with password 'pet', then grant all privileges on the pet database to the pet user.
 
@@ -105,9 +100,6 @@ for stage 1.0.0 we need to checkout this branch
 
 ```bash
 cd flexicore-boot-integration-demo
-```
-
-```
 git checkout 1.0.0
 ```
 
