@@ -51,9 +51,13 @@ This example uses a database and is configured to use PostgreSQL database.
 
     - then at PSQL command line, execute
 
+      
+
     - ```bash
       create database pet;
+      #will generate an error if the database 'pet' exists
       create user pet with password 'pet';
+      #will generate an error if the user 'pet' exists
       GRANT ALL PRIVILEGES ON database pet to pet;
       ```
 
@@ -144,6 +148,10 @@ You can test the APIs using the 'try it out' button, try the *PUT*  API and crea
 
 FlexiCore Boot Plugin Loading capabilities added , plugins were tested with the Person Service/Model and Library Service/Model found here: https://github.com/wizzdi/FlexiCore-Examples
 
+We will first test just the *Person* model and service. 
+
+As Person service depends on Person model, we have to build and **install** it first.
+
 ### clone the repository
 
   	this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
@@ -219,16 +227,26 @@ We need to build and install (some of the depend-on artifacts) the following pro
 ```bash
 cd person-model
 mvn clean install
+#build the person-model the person-service requires
 cd ../person-service
 mvn clean install
-#in case the folders are not there yet
-mkdir /home/flexicore/plugins
-mkdir /home/flexicore/entities
-# the above assumes using Windows PowerShell
+# we 'maven' install the person service as it will be needed by the library service.
 
 ```
 
+we now need to checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
 
+**Note that we do not add any dependencies on Person service or model**
+
+We need to use the 2.0.0 branch to add FlexiCore capabilities
+
+```bash
+cd ~/source/flexicore-boot-integration-demo
+git checkout 2.0.0
+mvn clean package
+```
+
+make sure build is successful and proceed to testing the system
 
  ## How to Run ?
 
@@ -236,6 +254,17 @@ run with spring boot properties launcher
 
 ```bash
 java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+```
+
+```
+#in case the folders are not there yet
+mkdir /home/flexicore/plugins
+mkdir /home/flexicore/entities
+# the above assumes using Windows PowerShell
+ cp .\target\person-service-2.0.0.jar C:\home\flexicore\plugins\
+ cd ..\person-model
+ cp .\target\person-model-2.0.0.jar C:\home\flexicore\entities\
+#we now have the person service and model in the default location for FlexiCore plugins
 ```
 
 plugins should be placed in the /home/flexicore/plugins directory , entities should be placed in the /home/flexicore/entities/ directory.
