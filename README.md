@@ -141,8 +141,7 @@ You should see, after a while, an interface for testing the API endpoints
 
 You can test the APIs using the 'try it out' button, try the *PUT*  API and create a pet. Then use the *GET* API to get created pets instances.
 
-
-![first stage.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg?raw=true)
+<img src="https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage-1.jpg?raw=true" alt="first stage-1.jpg" style="zoom:50%;" />
 
 # Branch 2.0.0
 
