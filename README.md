@@ -325,15 +325,60 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 
 wait till you see the last message indicating that the server has started
 
-![image-20210602154202962](C:\Users\Avishay Ben Natan\AppData\Roaming\Typora\typora-user-images\image-20210602154202962.png)
+```
+localhost:8080/swagger-ui.html
+```
+
+![second-stage-1.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/second-stage-1.jpg?raw=true)
 
 **As we can see by copying the plugins to correct folders, additional APIs (See the *Person* API), business workflows and domain model entities are now available on Swagger UI.**
 
+## Adding now additional plugins depending on the *Person * plugin set
 
+```
+cd ..\FlexiCore-Examples\library-model\
+# make sure you have the right folder
+cd ../library-service
+mvn clean install  -DskipTests
+ cp .\target\library-service-2.0.0.jar C:\home\flexicore\plugins\
+ cp ..\library-model\target\library-model-2.0.0.jar C:\home\flexicore\entities\
+ #you now should see in the plugins in the respective folder like this
+tree C:\home\flexicore\ /f
+
+├───entities
+│       library-model-2.0.0.jar
+│       person-model-2.0.0.jar
+│
+└───plugins
+        library-service-2.0.0.jar
+        person-service-2.0.0.jar
+        
+#make sure that that you see the above
+```
+
+now restart the server
+
+```
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
+```
+
+wait till the server ready and access it:
+
+```
+localhost:8080/swagger-ui.html
+```
+
+You should now see additional APIs for managing library entities, subscriptions etc.
+
+<img src="https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/stage%204.jpg?raw=true" alt="stage 4.jpg" style="zoom:50%;" />
 
 # Branch 3.0.0
 
-[FlexiCore Boot Dynamic UI](https://support.wizzdi.com/#dynamic-user-interface) Capabilities Demo
+[FlexiCore Boot Dynamic UI](https://support.wizzdi.com/#dynamic-user-interface) Capabilities Demo.
+
+
 
  ## How to Run ?
 
