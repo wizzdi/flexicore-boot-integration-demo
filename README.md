@@ -11,7 +11,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 ## Two different options for running this demo
 
-- clone this repository and later in the demo the plugins repositories, this is the recommended way but it requires a manual installation of 
+- clone this repository and later in the demo the plugins repositories, this is the recommended  approach and it requires a manual installation of all prerequisites. 
 
 - use a pre-installed Docker from here
 
@@ -78,6 +78,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 
   - You can use Pgadmin to create the **pet database **, create a user 'pet' with password 'pet', then grant all privileges on the pet database to the pet user.
+  - **Note**  The commands in this tutorial were executed using Windows PowerShell, standard *CMD* may require small changes.
 
  
 
@@ -89,7 +90,9 @@ the initial spring boot application does not contain any FlexiCore Boot Dependen
 
 at the command line, change the current directory to an empty directory of your choice, for example:
 
-C:\Users\User\source>
+```bash
+C:\Users\User\source
+```
 
 Get the source from GitHub
 
@@ -134,10 +137,12 @@ make sure you get something similar to:
 
 
 
+```bash
 *[INFO] BUILD SUCCESS*
 *[INFO] ------------------------------------------------------------------------*
 *[INFO] Total time:  10.718 s*
 *[INFO] Finished at: 2021-06-02T11:30:15+03:00*
+```
 
 The first time you build may take few minutes for all dependencies to be fetched from online repositories.
 
@@ -166,14 +171,17 @@ We will now show how plugins and entities jar can be added to pre-designated or 
 
 For this we need to add to the Spring Boot Application the required FlexiCore dependencies, this is done once.  Then the life cycle of a system will be 100% in plugins.
 
-Checkout the Spring app to version 2.00 so it will include the required FlexiCore dependencies.
+Checkout the Spring app to version 2.0.0 so it will include the required FlexiCore dependencies.
 
 ## FlexiCore boot modules added
 
 We need to use the 2.0.0 branch to add FlexiCore capabilities
 
 ```bash
-cd ~/source/flexicore-boot-integration-demogit checkout 2.0.0mvn clean package
+cd ~/source/flexicore-boot-integration-demo
+
+git checkout 2.0.0
+mvn clean package
 ```
 
 make sure build is successful and proceed to testing the system.
@@ -183,16 +191,15 @@ make sure build is successful and proceed to testing the system.
 run with spring boot properties launcher
 
 ```bash
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar#the '' are required when using PowerShell on Windows
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+#the '' are required when using PowerShell on Windows
 ```
 
-    wait till the server starts and access the API via Swagger
+wait till the server starts and access the API via Swagger.
 
 usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
 
-```
 http://localhost:8080/swagger-ui.html
-```
 
 ![first stage.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/first%20stage.jpg?raw=true)
 
@@ -202,15 +209,15 @@ You can now see that many APIs endpoints have been added to the system, these ar
 
 
 
-files found [here](https://github.com/wizzdi/FlexiCore-Examples)
+Clone the plugins samples repository from  [here](https://github.com/wizzdi/FlexiCore-Examples)
 
 We will first add just the *Person* model and service. 
 
 As Person service depends on Person model, we have to build and **install** it first.
 
-### clone the repository
+### Clone the repository
 
-  	this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
+this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
 
 ```bash
 cd ~/source # this is the root folder in our case
@@ -315,7 +322,7 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 
 
 
-## As plugins were copied to folders,  new APIs appear....
+## 
 
 We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
 
@@ -325,7 +332,9 @@ plugins should be placed in the /home/flexicore/plugins directory , entities sho
 
  ## How to Test?
 
- Swagger interface can be found in http://localhost:8080/swagger-ui.html , note that in the 2.0.0 fake authentication mechanism is used so a fake token should be provided when using swagger ( if the API requires a token).
+As plugins were copied to folders,  new APIs appear.
+
+ Swagger interface can be found in http://localhost:8080/swagger-ui.html , note that in the 2.0.0 branch fake authentication mechanism is used so a fake token should be provided when using swagger ( if the API requires a token).
 
 
 
@@ -335,17 +344,15 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 #replace with the correct location for your Spring Boot application
 ```
 
-wait till you see the last message indicating that the server has started
+wait till you see the last message indicating that the server has started by showing the number of beans loaded, then from the browser
 
-```
-localhost:8080/swagger-ui.html
-```
+http://localhost:8080/swagger-ui.html
 
 ![second-stage-1.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/second-stage-1.jpg?raw=true)
 
 **As we can see by copying the plugins to correct folders, additional APIs (See the *Person* API), business workflows and domain model entities are now available on Swagger UI.**
 
-## Add additional plugins depending on the *Person * plugin set
+## Add additional plugins depending on the Person plugin set
 
 ```
 cd ..\FlexiCore-Examples\library-model\
@@ -378,9 +385,7 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 
 wait till the server ready and access it:
 
-```
 localhost:8080/swagger-ui.html
-```
 
 You should now see additional APIs for managing library entities, subscriptions etc.
 
@@ -390,7 +395,13 @@ You should now see additional APIs for managing library entities, subscriptions 
 
 ## Enable tests on library-service
 
-We have built the library-service with the *-DskipTests* option.
+We have built the library-service with the 
+
+```
+-DskipTests
+```
+
+ option.
 
 this is because there must be a database set for the tests, this database is dropped on every run and it is not the '**pet** **database**' 
 
@@ -436,9 +447,15 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
 
 ## Prerequisites
 
-- The standard Swagger-UI cannot be used, instead download this front end code from [FlexiCore Swagger ui](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/be414b56ca1878d013f900bc67bbb9f4fbac9d73/swagger-ui.zip)
+- The standard Swagger-UI cannot be used, instead download this front end code from [FlexiCore Swagger ui](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/be414b56ca1878d013f900bc67bbb9f4fbac9d73/swagger-ui.zip)  this is because the exampleoriginal swagger-ui will work, but require you to login and copy the token for use in all protected APIs,also - JAX-RS APIs exported by the server will not show correctly on standard Swagger-UI.
 
-- the zip file should be opened into c:\home\flexicore\ui-swagger
+- The standard Swagger-UI cannot be used, instead download this front end code from FlexiCore Swagger ui --- we can mention here that it(
+
+- the zip file should be opened into 
+
+  ```
+  c:\home\flexicore\ui-swagger
+  ```
 
   This location is defined in the application.properties file in resources , here:
 
@@ -455,7 +472,13 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
   │               application.properties
   ```
 
-  once the zip file is opened the structure of c:\home\flexicore  is:
+  once the zip file is opened the structure of
+
+  ```
+   c:\home\flexicore  
+  ```
+
+  
 
   ```
   │   firstRun.txt  **this file stores the random password for sign-in**
@@ -497,7 +520,8 @@ mvn clean package
 
 run with spring boot properties launcher
 
-    java -Dloader.main=com.example.pet.Application -Dloader.debug=true -Dloader.path=file:/home/flexicore/entities/ -jar pet-server-3.0.0-exec.jar 
+    java '-Dloader.main=com.example.pet.Application -Dloader.debug=true'
+    '-Dloader.path=file:/home/flexicore/entities/'' -jar pet-server-3.0.0-exec.jar 
 
 
 
@@ -515,7 +539,11 @@ total of 677 beans
 (you may see some exceptions in the logs, for example because of a missing MongoDB used for storing health information, simply ignore)
 
  Swagger interface can be found in http://localhost:8080/FlexiCore/
- login is done using the admin@flexicore.com user this user password is show in a text file called **firstRun.txt** in c:\home\flexicore
+ login is done using the admin@flexicore.com user this user password is show in this text file:
+
+```
+c:\home\fllexicore\firtsRun.txt
+```
 
 the sign-in dialog
 
