@@ -138,7 +138,10 @@ make sure you get something similar to:
 
 
 ```bash
-*[INFO] BUILD SUCCESS**[INFO] ------------------------------------------------------------------------**[INFO] Total time:  10.718 s**[INFO] Finished at: 2021-06-02T11:30:15+03:00*
+*[INFO] BUILD SUCCESS*
+*[INFO] ------------------------------------------------------------------------*
+*[INFO] Total time:  10.718 s*
+*[INFO] Finished at: 2021-06-02T11:30:15+03:00*
 ```
 
 The first time you build may take few minutes for all dependencies to be fetched from online repositories.
@@ -149,7 +152,9 @@ The first time you build may take few minutes for all dependencies to be fetched
 
 run as any spring boot application:
 
-    java -jar target/pet-server-1.0.0-exec.jar
+```bash
+java -jar target/pet-server-1.0.0-exec.jar
+```
 
 
 
@@ -175,7 +180,10 @@ Checkout the Spring app to version 2.0.0 so it will include the required FlexiCo
 We need to use the 2.0.0 branch to add FlexiCore capabilities
 
 ```bash
-cd ~/source/flexicore-boot-integration-demogit checkout 2.0.0mvn clean package
+cd ~/source/flexicore-boot-integration-demo
+
+git checkout 2.0.0
+mvn clean package
 ```
 
 make sure build is successful and proceed to testing the system.
@@ -185,7 +193,8 @@ make sure build is successful and proceed to testing the system.
 run with spring boot properties launcher
 
 ```bash
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar#the '' are required when using PowerShell on Windows
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
+#the '' are required when using PowerShell on Windows
 ```
 
 wait till the server starts and access the API via Swagger.
@@ -213,24 +222,109 @@ As Person service depends on Person model, we have to build and **install** it f
 this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
 
 ```bash
-cd ~/source # this is the root folder in our casegit clone https://github.com/wizzdi/FlexiCore-Examplescd FlexiCore-Examplestree ├───hello-world-rest│  ├───hello-world-service│   ├───library-model│   └───src│       └───main│           ├───java│           │   └───com│           │       └───flexicore│           │           └───example│           │               └───library│           │                   └───model│           └───resources├───library-service│   └───src│       ├───main│       │   └───java│       │       └───com│       │           └───flexicore│       │               └───examples│       │                   ├───data│       │                   ├───request│       │                   ├───rest│       │                   └───service│       └───test│           ├───java│           │   └───com│           │       └───flexicore│           │           └───examples│           │               └───app│           └───resources├───person-model│   └───src│       └───main│           ├───java│           │   └───com│           │       └───flexicore│           │           └───example│           │               └───person│           └───resources└───person-service    └───src        ├───main        │   └───java        │       └───com        │           └───flexicore        │               └───examples        │                   ├───data        │                   ├───request        │                   ├───rest        │                   └───service        └───test            ├───java            │   └───com            │       └───flexicore            │           └───examples            │               └───app            └───resources
+cd ~/source # this is the root folder in our case
+git clone https://github.com/wizzdi/FlexiCore-Examples
+cd FlexiCore-Examples
+tree 
+├───hello-world-rest
+│  
+├───hello-world-service
+│   
+├───library-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───library
+│           │                   └───model
+│           └───resources
+├───library-service
+│   └───src
+│       ├───main
+│       │   └───java
+│       │       └───com
+│       │           └───flexicore
+│       │               └───examples
+│       │                   ├───data
+│       │                   ├───request
+│       │                   ├───rest
+│       │                   └───service
+│       └───test
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───examples
+│           │               └───app
+│           └───resources
+├───person-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───person
+│           └───resources
+└───person-service
+    └───src
+        ├───main
+        │   └───java
+        │       └───com
+        │           └───flexicore
+        │               └───examples
+        │                   ├───data
+        │                   ├───request
+        │                   ├───rest
+        │                   └───service
+        └───test
+            ├───java
+            │   └───com
+            │       └───flexicore
+            │           └───examples
+            │               └───app
+            └───resources
 ```
 
 We need to build and install (some of the depend-on artifacts) the following projects
 
 ```bash
-cd person-modelmvn clean install#built the person-model the person-service requirescd ../person-servicemvn clean install# we use 'maven' install the person service as it will be needed by the library service.#in case the folders are not there yetmkdir /home/flexicore/pluginsmkdir /home/flexicore/entities# the above assumes using Windows PowerShell#copy the person-model jar to default locationcp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.0.jar  C:\home\flexicore\entities\#copy the person-service plugin to default location cp C:\Users\User\source\FlexiCore-Examples\person-service\target\person-service-2.0.0.jar C:\home\flexicore\plugins\#we now have the person service and model in the default location for FlexiCore plugins
+cd person-model
+mvn clean install
+#built the person-model the person-service requires
+cd ../person-service
+mvn clean install
+# we use 'maven' install the person service as it will be needed by the library service.
+
+#in case the folders are not there yet
+mkdir /home/flexicore/plugins
+mkdir /home/flexicore/entities
+# the above assumes using Windows PowerShell
+#copy the person-model jar to default location
+cp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.0.jar  C:\home\flexicore\entities\
+
+#copy the person-service plugin to default location
+ cp C:\Users\User\source\FlexiCore-Examples\person-service\target\person-service-2.0.0.jar C:\home\flexicore\plugins\
+
+
+
+#we now have the person service and model in the default location for FlexiCore plugins
+
 ```
 
 now stop the running Spring application from the previous stage and run it again, unchanged.
 
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-1.0.0-exec.jar
+
+#make sure that you corectly change the path to the location of pet-server-1.0.0-exec.jar on your system
+
 ```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-1.0.0-exec.jar#make sure that you corectly change the path to the location of pet-server-1.0.0-exec.jar on your system
-```
 
 
 
-## 
+
 
 We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
 
@@ -246,8 +340,10 @@ As plugins were copied to folders,  new APIs appear.
 
 
 
-```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar#replace with the correct location for your Spring Boot application
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
 ```
 
 wait till you see the last message indicating that the server has started by showing the number of beans loaded, then from the browser
@@ -260,14 +356,33 @@ http://localhost:8080/swagger-ui.html
 
 ## Add additional plugins depending on the Person plugin set
 
-```
-cd ..\FlexiCore-Examples\library-model\# make sure you have the right foldercd ../library-servicemvn clean install  -DskipTests cp .\target\library-service-2.0.0.jar C:\home\flexicore\plugins\ cp ..\library-model\target\library-model-2.0.0.jar C:\home\flexicore\entities\ #you now should see in the plugins in the respective folder like thistree C:\home\flexicore\ /f├───entities│       library-model-2.0.0.jar│       person-model-2.0.0.jar│└───plugins        library-service-2.0.0.jar        person-service-2.0.0.jar        #make sure that that you see the above
+```bash
+cd ..\FlexiCore-Examples\library-model\
+# make sure you have the right folder
+cd ../library-service
+mvn clean install  -DskipTests
+ cp .\target\library-service-2.0.0.jar C:\home\flexicore\plugins\
+ cp ..\library-model\target\library-model-2.0.0.jar C:\home\flexicore\entities\
+ #you now should see in the plugins in the respective folder like this
+tree C:\home\flexicore\ /f
+
+├───entities
+│       library-model-2.0.0.jar
+│       person-model-2.0.0.jar
+│
+└───plugins
+        library-service-2.0.0.jar
+        person-service-2.0.0.jar
+        
+#make sure that that you see the above
 ```
 
 now stop (ctrl+c) start the server
 
-```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar#replace with the correct location for your Spring Boot application
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
 ```
 
 wait till the server ready and access it:
@@ -284,7 +399,7 @@ You should now see additional APIs for managing library entities, subscriptions 
 
 We have built the library-service with the 
 
-```
+```bash
 -DskipTests
 ```
 
@@ -297,13 +412,25 @@ this is because there must be a database set for the tests, this database is dro
 Setting the database and user for the test
 
 ```bash
-'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'# click 'enter' for all prompts using the defaults# provide the password for adminstration as set when installing PostgreSQL# at PSQL prompt create database "flexicore-boot";# may fail if this database exists create user "flexicore-boot" with password 'flexicore-boot'; # may fail if this user exists grant all privileges on database "flexicore-boot" to "flexicore-boot";#note the single and double quotes needed because of the hyphen in the name.\q# to exit PSQL
+'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'
+# click 'enter' for all prompts using the defaults
+# provide the password for adminstration as set when installing PostgreSQL
+# at PSQL prompt
+ create database "flexicore-boot";
+# may fail if this database exists
+ create user "flexicore-boot" with password 'flexicore-boot';
+ # may fail if this user exists
+ grant all privileges on database "flexicore-boot" to "flexicore-boot";
+#note the single and double quotes needed because of the hyphen in the name.
+\q
+# to exit PSQL
 ```
 
 now you can run the build of the *library-service*  with tests.
 
 ```bash
- cd C:\Users\User\source\FlexiCore-Examples\library-service\ mvn clean install
+ cd C:\Users\User\source\FlexiCore-Examples\library-service\
+ mvn clean install
 ```
 
 After a while , you should see the 'build success' message, it will be provided **only** if all tests pass.
@@ -328,26 +455,51 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
 
 - the zip file should be opened into 
 
-  ```
+  ```bash
   c:\home\flexicore\ui-swagger
   ```
 
   This location is defined in the application.properties file in resources , here:
 
-  ```
-  ───src│   └───main│       ├───java│       │   └───com│       │       └───example│       │           └───pet.....│       ││       └───resources│               application.properties
+  ```bash
+  ───src
+  │   └───main
+  │       ├───java
+  │       │   └───com
+  │       │       └───example
+  │       │           └───pet
+  .....
+  │       │
+  │       └───resources
+  │               application.properties
   ```
 
   once the zip file is opened the structure of
 
-  ```
-   c:\home\flexicore  
-  ```
-
   
 
   ```
-  │   firstRun.txt  **this file stores the random password for sign-in**│   jwt.secret│├───entities│       library-model-2.0.0.jar│       person-model-2.0.0.jar│├───plugins│       library-service-2.0.0.jar│       person-service-2.0.0.jar│└───ui-swagger    │   3rdpartylicenses.txt    │   background-wizzdi.e6a2a8a32e9402cad5a1.jpeg  ............    │​    └───assets
+   c:\home\flexicore  
+   #is:
+  │   firstRun.txt  **this file stores the random password for sign-in**
+  │   jwt.secret
+  │
+  ├───entities
+  │       library-model-2.0.0.jar
+  │       person-model-2.0.0.jar
+  │
+  ├───plugins
+  │       library-service-2.0.0.jar
+  │       person-service-2.0.0.jar
+  │
+  └───ui-swagger
+      │   3rdpartylicenses.txt
+      │   background-wizzdi.e6a2a8a32e9402cad5a1.jpeg
+    ............
+      │
+  ​    └───assets
+  
+  
   ```
 
   
@@ -368,7 +520,7 @@ mvn clean package
 
 run with spring boot properties launcher
 
-```
+```bash
 java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
 
 #replace with the correct location for your Spring Boot application
@@ -391,7 +543,7 @@ total of 677 beans
  Swagger interface can be found in http://localhost:8080/FlexiCore/
  login is done using the admin@flexicore.com user this user password is show in this text file:
 
-```
+```bash
 c:\home\fllexicore\firtsRun.txt
 ```
 
