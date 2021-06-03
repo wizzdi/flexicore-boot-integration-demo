@@ -30,7 +30,7 @@ This example uses a database and is configured to use PostgreSQL database.
   - you can use the [tutorial](https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph)
   - test Java installation by typing (at the command line) *java -version*
 
-- Apache Maven from [here] ( https://maven.apache.org/download.cgi)
+- Apache Maven from [here]( https://maven.apache.org/download.cgi)
 
   - Maven is used here for building the artifacts, these can be built using an IDE like IntelliJ/Netbeans/Eclipse.
   - Maven bin folder should be added to the path variable.
@@ -38,7 +38,7 @@ This example uses a database and is configured to use PostgreSQL database.
 
 - Install *git *  for Windows from [here]( https://git-scm.com/download/win)
 
-- PostgreSQL database server from [here] (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+- PostgreSQL database server from [here](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
   - You can uncheck the *stack builder * tools of the installer.
 
@@ -202,19 +202,104 @@ As Person service depends on Person model, we have to build and **install** it f
   	this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
 
 ```bash
-cd ~/sourcegit clone https://github.com/wizzdi/FlexiCore-Examplescd FlexiCore-Examplestree ├───hello-world-rest│  ├───hello-world-service│   ├───library-model│   └───src│       └───main│           ├───java│           │   └───com│           │       └───flexicore│           │           └───example│           │               └───library│           │                   └───model│           └───resources├───library-service│   └───src│       ├───main│       │   └───java│       │       └───com│       │           └───flexicore│       │               └───examples│       │                   ├───data│       │                   ├───request│       │                   ├───rest│       │                   └───service│       └───test│           ├───java│           │   └───com│           │       └───flexicore│           │           └───examples│           │               └───app│           └───resources├───person-model│   └───src│       └───main│           ├───java│           │   └───com│           │       └───flexicore│           │           └───example│           │               └───person│           └───resources└───person-service    └───src        ├───main        │   └───java        │       └───com        │           └───flexicore        │               └───examples        │                   ├───data        │                   ├───request        │                   ├───rest        │                   └───service        └───test            ├───java            │   └───com            │       └───flexicore            │           └───examples            │               └───app            └───resources
+cd ~/source
+git clone https://github.com/wizzdi/FlexiCore-Examples
+cd FlexiCore-Examples
+tree 
+├───hello-world-rest
+│  
+├───hello-world-service
+│   
+├───library-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───library
+│           │                   └───model
+│           └───resources
+├───library-service
+│   └───src
+│       ├───main
+│       │   └───java
+│       │       └───com
+│       │           └───flexicore
+│       │               └───examples
+│       │                   ├───data
+│       │                   ├───request
+│       │                   ├───rest
+│       │                   └───service
+│       └───test
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───examples
+│           │               └───app
+│           └───resources
+├───person-model
+│   └───src
+│       └───main
+│           ├───java
+│           │   └───com
+│           │       └───flexicore
+│           │           └───example
+│           │               └───person
+│           └───resources
+└───person-service
+    └───src
+        ├───main
+        │   └───java
+        │       └───com
+        │           └───flexicore
+        │               └───examples
+        │                   ├───data
+        │                   ├───request
+        │                   ├───rest
+        │                   └───service
+        └───test
+            ├───java
+            │   └───com
+            │       └───flexicore
+            │           └───examples
+            │               └───app
+            └───resources
 ```
 
 We need to build and install (some of the depend-on artifacts) the following projects
 
 ```bash
-cd person-modelmvn clean install#built the person-model the person-service requirescd ../person-servicemvn clean install# we 'maven' install the person service as it will be needed by the library service.#in case the folders are not there yetmkdir /home/flexicore/pluginsmkdir /home/flexicore/entities# the above assumes using Windows PowerShell#copy the person-model jar to default locationcp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.0.jar  C:\home\flexicore\entities\#copy the person-service plugin to default location cp C:\Users\User\source\FlexiCore-Examples\person-service\target\person-service-2.0.0.jar C:\home\flexicore\plugins\#we now have the person service and model in the default location for FlexiCore plugins
+cd person-model
+mvn clean install
+#built the person-model the person-service requires
+cd ../person-service
+mvn clean install
+# we 'maven' install the person service as it will be needed by the library service.
+
+#in case the folders are not there yet
+mkdir /home/flexicore/plugins
+mkdir /home/flexicore/entities
+# the above assumes using Windows PowerShell
+#copy the person-model jar to default location
+cp C:\Users\User\source\FlexiCore-Examples\person-model\target\person-model-2.0.0.jar  C:\home\flexicore\entities\
+
+#copy the person-service plugin to default location
+ cp C:\Users\User\source\FlexiCore-Examples\person-service\target\person-service-2.0.0.jar C:\home\flexicore\plugins\
+
+
+
+#we now have the person service and model in the default location for FlexiCore plugins
+
 ```
 
 now stop the running Spring application from the previous stage and run it again, unchanged.
 
 ```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-1.0.0-exec.jar#make sure that you corectly change the path to the location of pet-server-1.0.0-exec.jar on your system
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-1.0.0-exec.jar
+
+#make sure that you corectly change the path to the location of pet-server-1.0.0-exec.jar on your system
+
 ```
 
 
@@ -234,7 +319,9 @@ plugins should be placed in the /home/flexicore/plugins directory , entities sho
 
 
 ```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar#replace with the correct location for your Spring Boot application
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
 ```
 
 wait till you see the last message indicating that the server has started
@@ -250,13 +337,32 @@ localhost:8080/swagger-ui.html
 ## Adding now additional plugins depending on the *Person * plugin set
 
 ```
-cd ..\FlexiCore-Examples\library-model\# make sure you have the right foldercd ../library-servicemvn clean install  -DskipTests cp .\target\library-service-2.0.0.jar C:\home\flexicore\plugins\ cp ..\library-model\target\library-model-2.0.0.jar C:\home\flexicore\entities\ #you now should see in the plugins in the respective folder like thistree C:\home\flexicore\ /f├───entities│       library-model-2.0.0.jar│       person-model-2.0.0.jar│└───plugins        library-service-2.0.0.jar        person-service-2.0.0.jar        #make sure that that you see the above
+cd ..\FlexiCore-Examples\library-model\
+# make sure you have the right folder
+cd ../library-service
+mvn clean install  -DskipTests
+ cp .\target\library-service-2.0.0.jar C:\home\flexicore\plugins\
+ cp ..\library-model\target\library-model-2.0.0.jar C:\home\flexicore\entities\
+ #you now should see in the plugins in the respective folder like this
+tree C:\home\flexicore\ /f
+
+├───entities
+│       library-model-2.0.0.jar
+│       person-model-2.0.0.jar
+│
+└───plugins
+        library-service-2.0.0.jar
+        person-service-2.0.0.jar
+        
+#make sure that that you see the above
 ```
 
 now restart the server
 
 ```
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar#replace with the correct location for your Spring Boot application
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
 ```
 
 wait till the server ready and access it:
@@ -282,13 +388,25 @@ this is because there must be a database set for the tests, this database is dro
 Setting the database and user for the test
 
 ```bash
-'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'# enter on all prompts# provide the password for adminstration #then create database "flexicore-boot";# may fail if this database exists create user "flexicore-boot" with password 'flexicore-boot'; # may fail if this user exists grant all privileges on database "flexicore-boot" to "flexicore-boot";#note the single and double quotes needed because of the hyphen in the name.\q# to exit PSQL
+'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'
+# enter on all prompts
+# provide the password for adminstration 
+#then
+ create database "flexicore-boot";
+# may fail if this database exists
+ create user "flexicore-boot" with password 'flexicore-boot';
+ # may fail if this user exists
+ grant all privileges on database "flexicore-boot" to "flexicore-boot";
+#note the single and double quotes needed because of the hyphen in the name.
+\q
+# to exit PSQL
 ```
 
 now you can run the build of the *library-service*  with tests.
 
 ```bash
- cd C:\Users\User\source\FlexiCore-Examples\library-service\ mvn clean install
+ cd C:\Users\User\source\FlexiCore-Examples\library-service\
+ mvn clean install
 ```
 
 After a while , you should see the 'build success' message, it will be provided **only** if all tests pass.
@@ -351,7 +469,10 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
 ## How to build
 
 ```bash
-cd C:\Users\User\source\flexicore-boot-integration-demo\git checkout 3.0.0mvn clean package
+cd C:\Users\User\source\flexicore-boot-integration-demo\
+git checkout 3.0.0
+mvn clean package
+
 ```
 
 
@@ -369,7 +490,10 @@ run with spring boot properties launcher
 This time the server will take sometime to start wait for a lines similar to this:
 
 ```bash
-zipFileServicezipFileToFileResourceRepositoryzipFileToFileResourceServicetotal of 677 beans
+zipFileService
+zipFileToFileResourceRepository
+zipFileToFileResourceService
+total of 677 beans
 ```
 
 (you may see some exceptions in the logs, for example because of a missing MongoDB used for storing health information, simply ignore)
