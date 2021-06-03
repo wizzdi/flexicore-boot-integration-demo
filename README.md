@@ -442,6 +442,7 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
 
   This location is defined in the application.properties file in resources , here:
 
+  ```
   ───src
   │   └───main
   │       ├───java
@@ -452,9 +453,11 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
   │       │
   │       └───resources
   │               application.properties
+  ```
 
   once the zip file is opened the structure of c:\home\flexicore  is:
 
+  ```
   │   firstRun.txt  **this file stores the random password for sign-in**
   │   jwt.secret
   │
@@ -470,9 +473,11 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
       │   3rdpartylicenses.txt
       │   background-wizzdi.e6a2a8a32e9402cad5a1.jpeg
     ............
-
-  ​    │
+      │
   ​    └───assets
+  
+  
+  ```
 
   
 
@@ -498,7 +503,7 @@ run with spring boot properties launcher
 
  ## How to Test?
 
-This time the server will take sometime to start wait for a lines similar to this:
+This time the server will take some time (can be few minutes on virtual Windows) to start. Please wait for a lines similar to this:
 
 ```bash
 zipFileService
@@ -508,10 +513,6 @@ total of 677 beans
 ```
 
 (you may see some exceptions in the logs, for example because of a missing MongoDB used for storing health information, simply ignore)
-
-
-
-
 
  Swagger interface can be found in http://localhost:8080/FlexiCore/
  login is done using the admin@flexicore.com user this user password is show in a text file called **firstRun.txt** in c:\home\flexicore
@@ -537,5 +538,5 @@ Use the 'Try it Out' option to see how your APIs have created ate the server the
 See below the created JSON, look for the APIs created at each stage.
 [getAllInvokers result](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/1c6616a586cd4cf41f9e1acb9954e369b8c8027e/invokers.json)
 
-Expalaining how to use Invokers and other Classes for dynamic User Interface is out of scope for this tutorial, you can contact us for further help.
+Explaining how to use Invokers and other Classes for dynamic User Interface is out of scope for this tutorial, you can contact us for further help.
 
