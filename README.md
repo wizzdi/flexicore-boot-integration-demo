@@ -26,15 +26,31 @@ This example uses a database and is configured to use PostgreSQL database.
 
   - If you have another JDK installed, it can be used if >= version 11. However this demo was tested with version 11.
 
-  - The installation in Windows requires adding an environment variable JAVA_HOME and the bin folder of the JDK to Windows path.
-  - you can use the [tutorial](https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph)
-  - test Java installation by typing (at the command line) *java -version*
+  - The installation in Windows requires adding an environment variable JAVA_HOME and the addition bin folder of the JDK to Windows path.
+
+  - you can use the [tutorial](https://knowledge.exlibrisgroup.com/Aleph/Knowledge_Articles/How_to_Download_and_Install_OpenJDK_11_on_Windows_10_PC_for_Aleph) to read more on Open JDK installation.
+
+  - test Java installation by typing (at the command line) 
+
+    ```bash
+    java -version
+    ```
+
+    
 
 - Apache Maven from [here]( https://maven.apache.org/download.cgi)
 
-  - Maven is used here for building the artifacts, these can be built using an IDE like IntelliJ/Netbeans/Eclipse.
-  - Maven bin folder should be added to the path variable.
-  - check by *mvn -version*  
+  Maven is used here for building the artifacts, these can be built using an IDE like IntelliJ/Netbeans/Eclipse.
+
+  Maven bin folder should be added to the path variable.
+
+  check by:
+
+  ```bash
+  mvn -version
+  ```
+
+  
 
 - Install *git *  for Windows from [here]( https://git-scm.com/download/win)
 
@@ -46,28 +62,28 @@ This example uses a database and is configured to use PostgreSQL database.
 
   - you can either use PostgreSQL PGAdmin user interface or use PSQL at:
 
-    - C:\Program Files\PostgreSQL\13\scripts\runpsql.bat   (the actual number is the major version of PostgreSQL, here version 13)
+    C:\Program Files\PostgreSQL\13\scripts\runpsql.bat   (the actual number is the major version of PostgreSQL, here version 13)
 
-    - use enter at prompts, enter the password when prompted
+    use enter at prompts, enter the password when prompted
 
-    - then at PSQL command line, execute
+    then at PSQL command line, execute
 
-      
-
-    - ```bash
-      create database pet;
-      #will generate an error if the database 'pet' exists
-      create user pet with password 'pet';
-      #will generate an error if the user 'pet' exists
-      GRANT ALL PRIVILEGES ON database pet to pet;
-      ```
+    ```bash
+    create database pet;
+    #will generate an error if the database 'pet' exists
+    create user pet with password 'pet';
+    #will generate an error if the user 'pet' exists
+    GRANT ALL PRIVILEGES ON database pet to pet;
+    ```
 
 
-  - You can use Pgadmin to create the *pet *database **, create a user 'pet' with password 'pet', then grant all privileges on the pet database to the pet user.
+  - You can use Pgadmin to create the **pet database **, create a user 'pet' with password 'pet', then grant all privileges on the pet database to the pet user.
 
- the initial spring boot application does not contain any FlexiCore Boot Dependency
+ 
 
 # Branch 1.0.0
+
+the initial spring boot application does not contain any FlexiCore Boot Dependencies
 
 ## How to build
 
@@ -123,7 +139,7 @@ make sure you get something similar to:
 *[INFO] Total time:  10.718 s*
 *[INFO] Finished at: 2021-06-02T11:30:15+03:00*
 
-The first time you build can take few minutes for all dependencies to be fetched from online repositories.
+The first time you build may take few minutes for all dependencies to be fetched from online repositories.
 
 
 
@@ -154,14 +170,10 @@ Checkout the Spring app to version 2.00 so it will include the required FlexiCor
 
 ## FlexiCore boot modules added
 
-
-
 We need to use the 2.0.0 branch to add FlexiCore capabilities
 
 ```bash
-cd ~/source/flexicore-boot-integration-demo
-git checkout 2.0.0
-mvn clean package
+cd ~/source/flexicore-boot-integration-demogit checkout 2.0.0mvn clean package
 ```
 
 make sure build is successful and proceed to testing the system.
@@ -171,11 +183,10 @@ make sure build is successful and proceed to testing the system.
 run with spring boot properties launcher
 
 ```bash
-java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar
-#the '' are required when using PowerShell on Windows
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar pet-server-2.0.0-exec.jar#the '' are required when using PowerShell on Windows
 ```
 
-    wait till the server starts and access the API via Swagger:
+    wait till the server starts and access the API via Swagger
 
 usually the last line in the output when server is ready is (number of beans may differ) : **total of 319 beans**
 
@@ -191,7 +202,7 @@ You can now see that many APIs endpoints have been added to the system, these ar
 
 
 
-files found here: https://github.com/wizzdi/FlexiCore-Examples
+files found [here](https://github.com/wizzdi/FlexiCore-Examples)
 
 We will first add just the *Person* model and service. 
 
@@ -202,7 +213,7 @@ As Person service depends on Person model, we have to build and **install** it f
   	this is the folder for the source in our case, make sure that you are not inside *flexicore-boot-integration-demo* folder.
 
 ```bash
-cd ~/source
+cd ~/source # this is the root folder in our case
 git clone https://github.com/wizzdi/FlexiCore-Examples
 cd FlexiCore-Examples
 tree 
@@ -275,7 +286,7 @@ mvn clean install
 #built the person-model the person-service requires
 cd ../person-service
 mvn clean install
-# we 'maven' install the person service as it will be needed by the library service.
+# we use 'maven' install the person service as it will be needed by the library service.
 
 #in case the folders are not there yet
 mkdir /home/flexicore/plugins
@@ -304,7 +315,7 @@ java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader
 
 
 
-## Plugins copied to folders,  new APIs appear....
+## As plugins were copied to folders,  new APIs appear....
 
 We will now just copy the plugins we have created and see that additional APIs are added after restart (of the Spring-Boot app, **the application is not changed**)
 
@@ -334,7 +345,7 @@ localhost:8080/swagger-ui.html
 
 **As we can see by copying the plugins to correct folders, additional APIs (See the *Person* API), business workflows and domain model entities are now available on Swagger UI.**
 
-## Adding now additional plugins depending on the *Person * plugin set
+## Add additional plugins depending on the *Person * plugin set
 
 ```
 cd ..\FlexiCore-Examples\library-model\
@@ -357,7 +368,7 @@ tree C:\home\flexicore\ /f
 #make sure that that you see the above
 ```
 
-now restart the server
+now stop (ctrl+c) start the server
 
 ```
 java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
@@ -381,17 +392,17 @@ You should now see additional APIs for managing library entities, subscriptions 
 
 We have built the library-service with the *-DskipTests* option.
 
-this is because there must be a database set for the tests, this database is dropped on every run and it is not the 'pet database' 
+this is because there must be a database set for the tests, this database is dropped on every run and it is not the '**pet** **database**' 
 
-**you can skip this part and move to Branch 3.0.0 below**
+**you can skip this part and move to Branch 3.0.0 below** if you do not want to check unit tests on plugins.
 
 Setting the database and user for the test
 
 ```bash
 'C:\Program Files\PostgreSQL\13\scripts\runpsql.bat'
-# enter on all prompts
-# provide the password for adminstration 
-#then
+# click 'enter' for all prompts using the defaults
+# provide the password for adminstration as set when installing PostgreSQL
+# at PSQL prompt
  create database "flexicore-boot";
 # may fail if this database exists
  create user "flexicore-boot" with password 'flexicore-boot';
