@@ -1,10 +1,12 @@
 package com.example.pet.config;
 
 import com.example.pet.model.Pet;
-import com.flexicore.converters.JsonConverter;
 import com.flexicore.model.Baseclass;
+import com.flexicore.model.FilteringInformationHolder;
 import com.flexicore.model.SecurityUser;
 import com.flexicore.model.User;
+import com.wizzdi.dynamic.properties.converter.JsonConverter;
+import com.wizzdi.dynamic.properties.converter.postgresql.PostgresqlJsonConverter;
 import com.wizzdi.flexicore.boot.dynamic.invokers.model.DynamicExecution;
 import com.wizzdi.flexicore.boot.jpa.service.EntitiesHolder;
 import com.wizzdi.flexicore.file.model.FileResource;
@@ -22,6 +24,6 @@ public class ManualEntityProvider {
 	@Bean
 	@Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 	public EntitiesHolder manualEntityHolder(){
-		return new EntitiesHolder(new HashSet<>(Arrays.asList(Baseclass.class, User.class, SecurityUser.class, Pet.class, JsonConverter.class, FileResource.class,DynamicExecution.class)));
+		return new EntitiesHolder(new HashSet<>(Arrays.asList(Baseclass.class, User.class, SecurityUser.class, Pet.class, JsonConverter.class, PostgresqlJsonConverter.class, FileResource.class,DynamicExecution.class, FilteringInformationHolder.class)));
 	}
 }

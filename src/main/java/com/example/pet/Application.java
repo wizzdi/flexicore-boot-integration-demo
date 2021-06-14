@@ -2,6 +2,7 @@ package com.example.pet;
 
 import com.example.pet.data.PetRepository;
 import com.flexicore.annotations.EnableFlexiCoreBaseServices;
+import com.wizzdi.dynamic.properties.converter.EnableDynamicProperties;
 import com.wizzdi.flexicore.boot.base.annotations.plugins.EnableFlexiCorePlugins;
 import com.wizzdi.flexicore.boot.dynamic.invokers.annotations.EnableDynamicInvokersPlugins;
 import com.wizzdi.flexicore.boot.jaxrs.annotations.EnableFlexiCoreJAXRSPlugins;
@@ -33,6 +34,7 @@ import java.util.Arrays;
 @EnableFlexiCoreSwaggerPlugins
 @EnableDynamicInvokersPlugins
 @EnableFlexiCoreJAXRSPlugins
+@EnableDynamicProperties
 public class Application {
 
 
