@@ -1,7 +1,7 @@
 FROM alpine/git as clone
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/flexicore-boot-integration-demo.git
-RUN git checkout 1.0.0
+RUN git checkout --track origin/1.0.0
 
 FROM adoptopenjdk/openjdk11 as run
 WORKDIR /app
