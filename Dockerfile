@@ -30,6 +30,7 @@ WORKDIR /app
 COPY --from=build /app/flexicore-boot-integration-demo/target/pet-server-*-exec.jar /app/pet-server.jar
 RUN mkdir -p /home/flexicore/plugins
 RUN mkdir -p /home/flexicore/entities
+
 COPY --from=build /app/FlexiCore-Examples/person-model/target/person-model-*.jar /home/flexicore/entities/person-model.jar
 COPY --from=build /app/FlexiCore-Examples/person-service/target/person-service-*.jar /home/flexicore/plugins/person-service.jar
 COPY --from=build /app/FlexiCore-Examples/library-model/target/library-model-*.jar /home/flexicore/entities/library-model.jar
