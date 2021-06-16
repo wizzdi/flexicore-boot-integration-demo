@@ -1,29 +1,31 @@
 FROM alpine/git as clone
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/flexicore-boot-integration-demo.git
+WORKDIR /app/flexicore-boot-integration-demo
 RUN git checkout --track origin/4.0.0
-
-FROM alpine/git as clone-plugins
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/FlexiCore-Examples.git
 
+
 FROM maven:3.6.3-openjdk-11 as build
 WORKDIR /app
-COPY --from=clone /app/FlexiCore /app
+RUN mkdir flexicore-boot-integration-demo
+COPY --from=clone /app/flexicore-boot-integration-demo /app/flexicore-boot-integration-demo
+RUN mkdir FlexiCore-Examples
+COPY --from=clone /app/FlexiCore-Examples /app/FlexiCore-Examples
+WORKDIR /app/flexicore-boot-integration-demo
 RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-hair-dresser-grommer-service
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/hair-dresser-grommer-service /app
+WORKDIR /app/FlexiCore-Examples/hair-dresser-grommer-service
 RUN mvn install -DskipTests
 
 FROM adoptopenjdk/openjdk11 as run
 WORKDIR /app
 
-COPY --from=build /app/target/pet-server-*-exec.jar /app/pet-server.jar
+COPY --from=build /app/flexicore-boot-integration-demo/target/pet-server-*-exec.jar /app/pet-server.jar
 RUN mkdir -p /home/flexicore/plugins
 RUN mkdir -p /home/flexicore/entities
-COPY --from=build-person-service /app/target/hair-dresser-grommer-service-*.jar /home/flexicore/plugins/hair-dresser-grommer-service.jar
+COPY --from=build /app/FlexiCore-Examples/hair-dresser-grommer-service/target/hair-dresser-grommer-service-*.jar /home/flexicore/plugins/hair-dresser-grommer-service.jar
+
 
 RUN apt-get update && apt-get -qq -y install wget libcurl4 openssl liblzma5  gnupg maven lsb-release
 
