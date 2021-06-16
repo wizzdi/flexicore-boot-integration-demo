@@ -6,7 +6,6 @@ RUN git checkout --track origin/3.0.0
 FROM alpine/git as clone-plugins
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/FlexiCore-Examples.git
-RUN git checkout 2.0.0
 
 FROM maven:3.6.3-openjdk-11 as build
 WORKDIR /app
