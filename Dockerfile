@@ -10,7 +10,7 @@ RUN git clone https://github.com/wizzdi/FlexiCore-Examples.git
 
 FROM maven:3.6.3-openjdk-11 as build
 WORKDIR /app
-COPY --from=clone /app/FlexiCore /app
+COPY --from=clone /app/flexicore-boot-integration-demo /app
 RUN mvn install -DskipTests
 
 FROM maven:3.6.3-openjdk-11 as build-person-model
