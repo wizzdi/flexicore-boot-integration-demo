@@ -449,7 +449,7 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
 
 ## Prerequisites
 
-- The standard Swagger-UI cannot be used, instead download this front end code from [FlexiCore Swagger ui](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/be414b56ca1878d013f900bc67bbb9f4fbac9d73/swagger-ui.zip)  this is because the exampleoriginal swagger-ui will work, but require you to login and copy the token for use in all protected APIs,also - JAX-RS APIs exported by the server will not show correctly on standard Swagger-UI.
+- The standard Swagger-UI cannot be used, instead download this front end code from [FlexiCore Swagger ui](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/be414b56ca1878d013f900bc67bbb9f4fbac9d73/swagger-ui.zip)  this is because the examples original swagger-ui will work, but require you to login and copy the token for use in all protected APIs,also - JAX-RS APIs exported by the server will not show correctly on standard Swagger-UI.
 
 - The standard Swagger-UI cannot be used, instead download this front end code from FlexiCore Swagger ui --- we can mention here that it(
 
@@ -497,7 +497,7 @@ Basically, you can see below how the Metadata on the APIs (of all three types ) 
       │   background-wizzdi.e6a2a8a32e9402cad5a1.jpeg
     ............
       │
-  ​    └───assets
+      └───assets
   
   
   ```
@@ -569,4 +569,141 @@ See below the created JSON, look for the APIs created at each stage.
 [getAllInvokers result](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/1c6616a586cd4cf41f9e1acb9954e369b8c8027e/invokers.json)
 
 Explaining how to use Invokers and other Classes for dynamic User Interface is out of scope for this tutorial, you can contact us for further help.
+
+
+
+# Branch 4.0.0
+
+this branch shows how to list and use plugins in the plugin host.
+
+it uses the [Hair Dresser Groomer Plugin](https://github.com/wizzdi/FlexiCore-Examples/tree/master/hair-dresser-grommer-service).
+
+in this demo upon a new api called groom pet we will fetch all plugins that implement `PetGroomer` and groom the request `Pet`.
+
+we will show how plugins can respond to the new event called `PetCreated` which is published when a `Pet` is created.
+
+## Prerequisites
+
+- The standard Swagger-UI cannot be used, instead download this front end code from [FlexiCore Swagger ui](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/be414b56ca1878d013f900bc67bbb9f4fbac9d73/swagger-ui.zip)  this is because the examples original swagger-ui will work, but require you to login and copy the token for use in all protected APIs,also - JAX-RS APIs exported by the server will not show correctly on standard Swagger-UI.
+
+- The standard Swagger-UI cannot be used, instead download this front end code from FlexiCore Swagger ui --- we can mention here that it(
+
+- the zip file should be opened into 
+
+  ```bash
+  c:\home\flexicore\ui-swagger
+  ```
+
+  This location is defined in the application.properties file in resources , here:
+
+  ```bash
+  ───src
+  │   └───main
+  │       ├───java
+  │       │   └───com
+  │       │       └───example
+  │       │           └───pet
+  .....
+  │       │
+  │       └───resources
+  │               application.properties
+  ```
+
+  once the zip file is opened the structure of
+
+  
+
+  ```
+   c:\home\flexicore  
+   #is:
+  │   firstRun.txt  **this file stores the random password for sign-in**
+  │   jwt.secret
+  │
+  ├───entities
+  │     
+  ├───plugins
+  │       hair-dresser-grommer-service-1.0.0.jar
+  │
+  └───ui-swagger
+      │   3rdpartylicenses.txt
+      │   background-wizzdi.e6a2a8a32e9402cad5a1.jpeg
+    ............
+      │
+      └───assets
+  
+  
+  ```
+
+  
+
+
+## How to build
+
+```bash
+cd C:\Users\User\source\flexicore-boot-integration-demo\
+git checkout 4.0.0
+mvn clean package
+
+```
+
+
+
+ ## How to Run ?
+
+run with spring boot properties launcher
+
+```bash
+java '-Dloader.main=com.example.pet.Application' '-Dloader.debug=true' '-Dloader.path=file:/home/flexicore/entities/' -jar C:\Users\User\source\flexicore-boot-integration-demo\target\pet-server-2.0.0-exec.jar
+
+#replace with the correct location for your Spring Boot application
+
+
+
+ ## How to Test?
+
+This time the server will take some time (can be few minutes on virtual Windows) to start. Please wait for a lines similar to this:
+
+​```bash
+zipFileService
+zipFileToFileResourceRepository
+zipFileToFileResourceService
+total of 677 beans
+```
+
+(you may see some exceptions in the logs, for example because of a missing MongoDB used for storing health information, simply ignore)
+
+ Swagger interface can be found in http://localhost:8080/FlexiCore/
+ login is done using the admin@flexicore.com user this user password is show in this text file:
+
+```bash
+c:\home\fllexicore\firtsRun.txt
+```
+
+the sign-in dialog
+
+![sign-in.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/sign-in.jpg?raw=true)
+
+After sign-in (Login) wait for a while till Swagger UI is prepared.
+
+then you should see something similar to this
+
+![flexicore-swagger.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/flexicore-swagger.jpg?raw=true)
+
+you may search for pet API as follows:
+
+![create-pet.PNG](https://github.com/wizzdi/flexicore-boot-integration-demo/raw/master/create-pet.PNG)
+
+Use the 'Try it Out' option to create a pet, this will trigger the `PetCreated` and will automatically groom the created pet.
+
+![create-pet-response.PNG](https://github.com/wizzdi/flexicore-boot-integration-demo/raw/master/create-pet-response.PNG)
+
+now we can manually groom the pet by calling the groom pet api:
+
+![groom-pet.PNG](https://github.com/wizzdi/flexicore-boot-integration-demo/raw/master/groom-pet.PNG)
+
+this will find all `PetGroomer` implementations and call them.
+
+
+
+![calling getallinvokers.jpg](https://github.com/wizzdi/flexicore-boot-integration-demo/blob/master/calling%20getallinvokers.jpg?raw=true)
 
