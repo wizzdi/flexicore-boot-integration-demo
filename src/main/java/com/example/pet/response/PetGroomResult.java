@@ -30,4 +30,15 @@ public class PetGroomResult {
     public String getGroomerName() {
         return groomerName;
     }
+
+
+    @Override
+    public String toString() {
+        return "PetGroomResult{" +
+                "hairTrimmed=" + hairTrimmed +
+                ", fliesRemoved=" + fliesRemoved +
+                ", nailsCut=" + nailsCut +
+                ", groomerName='" + groomerName + '\'' +
+                '}';
+    }
 }

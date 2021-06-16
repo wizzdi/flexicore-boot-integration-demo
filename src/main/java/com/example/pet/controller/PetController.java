@@ -5,6 +5,7 @@ import com.example.pet.request.PetCreate;
 import com.example.pet.request.PetUpdate;
 import com.example.pet.response.PetGroomResponse;
 import com.example.pet.service.PetService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pet")
+@Tag(name = "Pet")
 public class PetController {
 
     @Autowired

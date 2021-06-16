@@ -12,4 +12,11 @@ public class PetGroomResponse {
     public List<PetGroomResult> getPetGroomResult() {
         return petGroomResult;
     }
+
+    @Override
+    public String toString() {
+        return "PetGroomResponse{" +
+                "petGroomResult=" + petGroomResult +
+                '}';
+    }
 }
