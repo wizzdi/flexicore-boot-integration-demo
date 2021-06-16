@@ -13,24 +13,9 @@ WORKDIR /app
 COPY --from=clone /app/FlexiCore /app
 RUN mvn install -DskipTests
 
-FROM maven:3.6.3-openjdk-11 as build-person-model
+FROM maven:3.6.3-openjdk-11 as build-hair-dresser-grommer-service
 WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/person-model /app
-RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-person-service
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/person-service /app
-RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-library-model
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/library-model /app
-RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-library-service
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/library-service /app
+COPY --from=clone-plugins /app/FlexiCore-Examples/hair-dresser-grommer-service /app
 RUN mvn install -DskipTests
 
 FROM adoptopenjdk/openjdk11 as run
@@ -39,10 +24,7 @@ WORKDIR /app
 COPY --from=build /app/target/pet-server-*-exec.jar /app/pet-server.jar
 RUN mkdir -p /home/flexicore/plugins
 RUN mkdir -p /home/flexicore/entities
-COPY --from=build-person-model /app/target/person-model-*.jar /home/flexicore/entities/person-model.jar
-COPY --from=build-person-service /app/target/person-service-*.jar /home/flexicore/plugins/person-service.jar
-COPY --from=build-library-model /app/target/library-model-*.jar /home/flexicore/entities/library-model.jar
-COPY --from=build-library-service /app/target/library-service-*.jar /home/flexicore/plugins/library-service.jar
+COPY --from=build-person-service /app/target/hair-dresser-grommer-service-*.jar /home/flexicore/plugins/hair-dresser-grommer-service.jar
 
 RUN apt-get update && apt-get -qq -y install wget libcurl4 openssl liblzma5  gnupg maven lsb-release
 
