@@ -3,46 +3,37 @@ WORKDIR /app
 RUN git clone https://github.com/wizzdi/flexicore-boot-integration-demo.git
 WORKDIR /app/flexicore-boot-integration-demo
 RUN git checkout --track origin/2.0.0
-
-FROM alpine/git as clone-plugins
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/FlexiCore-Examples.git
 
+
 FROM maven:3.6.3-openjdk-11 as build
 WORKDIR /app
-COPY --from=clone /app/flexicore-boot-integration-demo /app
+RUN mkdir flexicore-boot-integration-demo
+COPY --from=clone /app/flexicore-boot-integration-demo /app/flexicore-boot-integration-demo
+RUN mkdir FlexiCore-Examples
+COPY --from=clone /app/FlexiCore-Examples /app/FlexiCore-Examples
+WORKDIR /app/flexicore-boot-integration-demo
 RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-person-model
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/person-model /app
+WORKDIR /app/FlexiCore-Examples/person-model
 RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-person-service
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/person-service /app
+WORKDIR /app/FlexiCore-Examples/person-service
 RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-library-model
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/library-model /app
+WORKDIR /app/FlexiCore-Examples/library-model
 RUN mvn install -DskipTests
-
-FROM maven:3.6.3-openjdk-11 as build-library-service
-WORKDIR /app
-COPY --from=clone-plugins /app/FlexiCore-Examples/library-service /app
+WORKDIR /app/FlexiCore-Examples/library-service
 RUN mvn install -DskipTests
 
 FROM adoptopenjdk/openjdk11 as run
 WORKDIR /app
 
-COPY --from=build /app/target/pet-server-*-exec.jar /app/pet-server.jar
+COPY --from=build /app/flexicore-boot-integration-demo/target/pet-server-*-exec.jar /app/pet-server.jar
 RUN mkdir -p /home/flexicore/plugins
 RUN mkdir -p /home/flexicore/entities
-COPY --from=build-person-model /app/target/person-model-*.jar /home/flexicore/entities/person-model.jar
-COPY --from=build-person-service /app/target/person-service-*.jar /home/flexicore/plugins/person-service.jar
-COPY --from=build-library-model /app/target/library-model-*.jar /home/flexicore/entities/library-model.jar
-COPY --from=build-library-service /app/target/library-service-*.jar /home/flexicore/plugins/library-service.jar
+COPY --from=build /app/FlexiCore-Examples/person-model/target/person-model-*.jar /home/flexicore/entities/person-model.jar
+COPY --from=build /app/FlexiCore-Examples/person-service/target/person-service-*.jar /home/flexicore/plugins/person-service.jar
+COPY --from=build /app/FlexiCore-Examples/library-model/target/library-model-*.jar /home/flexicore/entities/library-model.jar
+COPY --from=build /app/FlexiCore-Examples/library-service/target/library-service-*.jar /home/flexicore/plugins/library-service.jar
 
 RUN apt-get update && apt-get -qq -y install wget libcurl4 openssl liblzma5  gnupg maven lsb-release
 
