@@ -3,6 +3,7 @@ package com.example.pet.controller;
 import com.example.pet.model.Pet;
 import com.example.pet.request.PetCreate;
 import com.example.pet.request.PetUpdate;
+import com.example.pet.response.PetGroomResponse;
 import com.example.pet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,10 @@ public class PetController {
     @DeleteMapping("/{id}")
     public void deletePet(@PathVariable("id")String id){
         petService.deleteById(id);
+    }
+
+    @PostMapping("/groom/{id}")
+    public PetGroomResponse groomPet(@PathVariable("id")String id){
+        return petService.groomPet(id);
     }
 }
