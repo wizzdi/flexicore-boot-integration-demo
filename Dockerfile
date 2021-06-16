@@ -1,6 +1,7 @@
 FROM alpine/git as clone
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/flexicore-boot-integration-demo.git
+WORKDIR /app/flexicore-boot-integration-demo
 RUN git checkout --track origin/2.0.0
 
 FROM alpine/git as clone-plugins
