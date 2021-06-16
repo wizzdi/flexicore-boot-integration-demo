@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/pet")
@@ -49,5 +50,9 @@ public class PetController {
     @PostMapping("/groom/{id}")
     public PetGroomResponse groomPet(@PathVariable("id")String id){
         return petService.groomPet(id);
+    }
+    @PostMapping("/groom")
+    public Set<String> getGroomers() {
+        return petService.getGroomers();
     }
 }

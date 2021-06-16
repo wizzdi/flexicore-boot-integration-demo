@@ -16,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,6 +65,11 @@ public class PetService {
         petRepository.deleteById(s);
     }
 
+    /**
+     * call groom on all implementers and return a list of PetGroomResult
+     * @param id
+     * @return
+     */
     public PetGroomResponse groomPet(String id) {
         Pet pet=petRepository.getOne(id);
         List<PetGroomResult> results = flexiCorePluginManager.getPluginApplicationContexts().stream()
@@ -75,5 +77,18 @@ public class PetService {
                 .flatMap(Collection::stream)
                 .map(f -> f.groom(pet)).collect(Collectors.toList());
         return new PetGroomResponse(results);
+    }
+
+    /**
+     * get all the canonical names of implementers of the PetGroomer interface
+     * @return
+     */
+    public Set<String> getGroomers() {
+        Set<String> implementers = flexiCorePluginManager.getPluginApplicationContexts().stream()
+                .map(f -> f.getBeansOfType(PetGroomer.class).values())
+                .flatMap(Collection::stream)
+                .map(f -> f.getClass().getSimpleName())
+                .collect(Collectors.toSet());
+        return implementers;
     }
 }
