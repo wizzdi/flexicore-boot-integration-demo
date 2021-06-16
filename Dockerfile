@@ -1,12 +1,23 @@
 FROM alpine/git as clone
 WORKDIR /app
 RUN git clone https://github.com/wizzdi/flexicore-boot-integration-demo.git
+WORKDIR /app/flexicore-boot-integration-demo
 RUN git checkout --track origin/1.0.0
+
+
+
+FROM maven:3.6.3-openjdk-11 as build
+WORKDIR /app
+RUN mkdir flexicore-boot-integration-demo
+COPY --from=clone /app/flexicore-boot-integration-demo /app/flexicore-boot-integration-demo
+WORKDIR /app/flexicore-boot-integration-demo
+RUN mvn install -DskipTests
+
 
 FROM adoptopenjdk/openjdk11 as run
 WORKDIR /app
 
-COPY --from=build /app/target/pet-server-*-exec.jar /app/pet-server.jar
+COPY --from=build /app/flexicore-boot-integration-demo/target/pet-server-*-exec.jar /app/pet-server.jar
 
 RUN apt-get update && apt-get -qq -y install wget libcurl4 openssl liblzma5  gnupg maven lsb-release
 
